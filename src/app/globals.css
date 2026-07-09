@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+@theme {
+  /* ─── Aseel Al Ghoroub 2 — official brand tokens ─── */
+  --color-green-900: #0a1f12;
+  --color-green-850: #0d2517;
+  --color-green-800: #12391f;
+  --color-green-700: #1b4d2e;
+  --color-green-600: #245f39;
+  --color-green-500: #40a86f;
+  --color-gold-300: #ebd59b;
+  --color-gold-500: #d1a952;
+  --color-gold-600: #b99450;
+  --color-offwhite: #f7f5ee;
+  --color-cream-dim: #d8d3c4;
+  --color-ink: #211e16;
+
+  --font-display: var(--font-bukra), var(--font-tajawal);
+  --font-body: var(--font-plex);
+  --font-latin: var(--font-jost);
+}
+
+html {
+  scroll-behavior: auto; /* Lenis drives scrolling */
+}
+
+body {
+  background: var(--color-green-900);
+  color: var(--color-offwhite);
+  font-family: var(--font-body);
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--color-gold-500);
+  color: var(--color-green-900);
+}
+
+/* thin luxury scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-green-900);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-green-700);
+  border-radius: 8px;
+  border: 2px solid var(--color-green-900);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold-600);
+}
+
+/* GSAP reveal targets start invisible only when JS is on (class set by Animator) */
+.js-anim [data-reveal],
+.js-anim [data-reveal-item],
+.js-anim [data-hero-item] {
+  visibility: hidden;
+}
+
+@layer components {
+  /* glass panel used across sections */
+  .glass {
+    background: color-mix(in srgb, #0a1b10 78%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-gold-500) 20%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  /* hairline inner keyline frame (brand PDF motif) */
+  .keyline {
+    position: absolute;
+    inset: 22px;
+    border: 1px solid color-mix(in srgb, var(--color-gold-300) 22%, transparent);
+    pointer-events: none;
+  }
+
+  /* gold corner brackets on hover-able media */
+  .brackets::before,
+  .brackets::after {
+    content: "";
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    border: 1.5px solid var(--color-gold-500);
+    opacity: 0;
+    transition: opacity 0.45s ease, transform 0.45s ease;
+    pointer-events: none;
+  }
+  .brackets::before {
+    top: 12px;
+    inset-inline-start: 12px;
+    border-bottom: none;
+    border-inline-end: none;
+    transform: translate(4px, 4px);
+  }
+  .brackets::after {
+    bottom: 12px;
+    inset-inline-end: 12px;
+    border-top: none;
+    border-inline-start: none;
+    transform: translate(-4px, -4px);
+  }
+  .brackets:hover::before,
+  .brackets:hover::after {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+/* latin digits inside Arabic flow */
+.num {
+  font-family: var(--font-latin);
+  direction: ltr;
+  unicode-bidi: isolate;
+  letter-spacing: 0.02em;
+}
